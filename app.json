@@ -27,10 +27,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rodcordeiro.drawings"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },    "experiments": {
+      "tsconfigPaths": true
+    },
+
+    "extra": {
+      "eas": {
+        "projectId": "7c0b0344-bd2e-4026-a974-c6109043155c"
+      }
     }
   }
 }
