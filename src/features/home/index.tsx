@@ -8,10 +8,15 @@ const Home: React.FC<ScreenProps<'Home'>> = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.text}>
         Aqui está meu desafio de desenho. Você terá 30 minutos para completar
-        este desenho. Lembrando que este desenho serve principalmente como um
-        treino, então não se preocupe em deixá-lo igual ou perfeito. A ideia é
-        fazer refazer esta referência no seu estilo ou em um novo estilo que
-        deseje estudar. Após o fim do tempo, a imagem irá ser substituída.
+        este desenho.
+      </Text>
+      <Text style={styles.text}>
+        Lembrando que este desenho serve principalmente como um treino, então
+        não se preocupe em deixá-lo igual ou perfeito. A ideia é fazer refazer
+        esta referência no seu estilo ou em um novo estilo que deseje estudar.
+      </Text>
+      <Text style={styles.text}>
+        Após o fim do tempo, a imagem irá ser substituída.
       </Text>
       <Pressable
         onPress={() => navigation.push('Drawing')}
@@ -44,6 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#8A2BE2',
+    borderRadius: 5,
   },
   buttonText: {
     color: 'white',

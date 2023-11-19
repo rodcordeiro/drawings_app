@@ -46,7 +46,7 @@ const Drawing: React.FC<ScreenProps<'Drawing'>> = () => {
       <Text
         style={[
           styles.clock,
-          clock < DRAWING_TIME * 0.25
+          clock > DRAWING_TIME * 0.25
             ? styles.clockWarningColor
             : styles.clockColor,
         ]}
@@ -73,7 +73,12 @@ const styles = StyleSheet.create({
   clock: {
     position: 'absolute',
     top: 50,
-    left: width / 2 - 10,
+    left: width / 2 - 28,
+    zIndex: 100,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: '#f0f0f0af',
+    borderRadius: 5,
   },
   clockWarningColor: { color: 'black' },
   clockColor: { color: '#d33' },
