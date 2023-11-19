@@ -1,62 +1,23 @@
 import React from 'react';
-import { View, Dimensions, Text, StyleSheet, Image } from 'react-native';
+import { View, Dimensions, Text, StyleSheet, Pressable } from 'react-native';
 
-import { references } from './utils/images';
+import { DRAWING_TIME } from '@/utils/contants.util';
 
-const { height, width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
-const Home: React.FC<ScreenProps<'Home'>> = () => {
-  const [clock, setClock] = React.useState<number>(5000);
-
-  const [hideMessage, setHideMessage] = React.useState<boolean>(false);
-  const [image, setImage] = React.useState<string>(
-    references[Math.floor(Math.random() * references.length)],
-  );
-
-  console.log(references, references.length);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setClock((prev) => {
-        if (prev - 1 === 0) {
-          setHideMessage(false);
-          setImage(references[Math.floor(Math.random() * references.length)]);
-          return 5000;
-        }
-        if (prev < 4900) setHideMessage(true);
-        return --prev;
-      });
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+const Home: React.FC<ScreenProps<'Home'>> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.clock}>{clock}</Text>
-      {!hideMessage && (
-        <Text
-          style={[
-            styles.clock,
-            {
-              left: 10,
-              top: 70,
-              width: width * 0.9,
-            },
-          ]}>
-          Tente fazer este desenho no seu estilo, o tempo contando é quanto
-          tempo você tem antes de trocar a imagem.
-        </Text>
-      )}
-      <Image
-        source={{
-          uri: image,
-        }}
-        width={width}
-        height={height}
-        resizeMode="contain"
-      />
+      <Text>
+        Aqui está meu desafio de desenho. Você terá {DRAWING_TIME} segundos para
+        completar este desenho. Lembrando que este desenho serve principalmente
+        como um treino, então não se preocupe em deixá-lo igual ou perfeito. A
+        ideia é fazer refazer esta referência no seu estilo ou em um novo estilo
+        que deseje estudar. Após o fim do tempo, a imagem irá ser substituída.
+      </Text>
+      <Pressable onPress={() => navigation.push('Drawing')}>
+        <Text>Começar</Text>
+      </Pressable>
     </View>
   );
 };
@@ -68,9 +29,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  clock: {
-    top: 50,
-    left: width / 2,
-    position: 'absolute',
+  text: {
+    textAlign: 'justify',
+    width: width / 3,
+  },
+  button: {
+    width: width / 3,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#8A2BE2',
+  },
+  buttonText: {
+    color: 'white',
   },
 });
