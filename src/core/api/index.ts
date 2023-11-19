@@ -5,6 +5,4 @@ const api = axios.create({
   timeout: 30000,
 });
 
-
-
 export { api };

@@ -3,6 +3,7 @@ import { View, Dimensions, Text, StyleSheet, Image } from 'react-native';
 
 import { DRAWING_TIME } from '@/utils/contants.util';
 import { GetDrawingReferences } from './api/drawing.api';
+import { formatSeconds } from './utils/drawing.util';
 
 const { height, width } = Dimensions.get('window');
 
@@ -48,8 +49,9 @@ const Drawing: React.FC<ScreenProps<'Drawing'>> = () => {
           clock < DRAWING_TIME * 0.25
             ? styles.clockWarningColor
             : styles.clockColor,
-        ]}>
-        {clock}
+        ]}
+      >
+        {formatSeconds(clock)}
       </Text>
       <Image
         source={{
