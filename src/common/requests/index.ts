@@ -4,7 +4,11 @@ import { REFERENCES } from '@/utils/contants.util';
 export const GetDrawingReferences = async () =>
   api
     .get<{
-      reference: string[];
+      references: string[];
     }>('/docs/drawing.json')
-    .then(({ data }) => data.reference || REFERENCES)
-    .catch(() => REFERENCES);
+    .then((response) => {
+      return response.data.references || REFERENCES;
+    })
+    .catch(() => {
+      return REFERENCES;
+    });

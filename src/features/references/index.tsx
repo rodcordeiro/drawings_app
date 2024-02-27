@@ -1,19 +1,17 @@
 import React from 'react';
-import {
-  ScrollView,
-  Dimensions,
-  Image,
-  Pressable,
-  StyleSheet,
-} from 'react-native';
+import { ScrollView, Image, Pressable, StyleSheet } from 'react-native';
 
 import { useReferences } from '@/hooks/references';
 
-const { width } = Dimensions.get('screen');
 const ReferencesScreen: React.FC<ScreenProps<'References'>> = ({
   navigation,
 }) => {
-  const { references } = useReferences();
+  const { references, getReferencies } = useReferences();
+
+  React.useLayoutEffect(() => {
+    getReferencies();
+  }, []);
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -31,7 +29,7 @@ const ReferencesScreen: React.FC<ScreenProps<'References'>> = ({
   );
 };
 
-export default React.memo(ReferencesScreen);
+export default ReferencesScreen;
 
 const styles = StyleSheet.create({
   container: {

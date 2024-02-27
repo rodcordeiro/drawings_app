@@ -3,6 +3,7 @@ import React from 'react';
 
 export interface IApp {
   references: string[];
+  getReferencies(): Promise<void>;
 }
 const AppContext = React.createContext<IApp>({} as IApp);
 type AppProviderProps = {
@@ -14,7 +15,18 @@ export function ReferenceHook({
 }: React.PropsWithChildren<AppProviderProps>) {
   const [references, setReferences] = React.useState<string[]>([]);
 
-  React.useEffect(() => {
+  async function getReferencies() {
+    await GetDrawingReferences()
+      .then((response) => {
+        setReferences(response);
+      })
+      .catch((response) => {
+        console.error(response);
+        setReferences(response);
+      });
+  }
+
+  React.useLayoutEffect(() => {
     GetDrawingReferences()
       .then((response) => {
         setReferences(response);
@@ -22,13 +34,14 @@ export function ReferenceHook({
       .catch((response) => {
         setReferences(response);
       });
-  });
+  }, []);
 
   return (
     <>
       <AppContext.Provider
         value={{
           references,
+          getReferencies,
         }}
       >
         {children}
