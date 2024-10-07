@@ -5,10 +5,14 @@ import { Toasts } from '@backpackapp-io/react-native-toast';
 
 export default function Drawings() {
   return (
-    <ReferenceHook>
+   <SafeAreaProvider>
+        <GestureHandlerRootView >
+           <ReferenceHook>
       <Navigation />
       <Toasts />
       <StatusBar style="auto" />
     </ReferenceHook>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
   );
 }
