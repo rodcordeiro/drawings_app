@@ -6,7 +6,8 @@ import { Toasts } from '@backpackapp-io/react-native-toast';
 export default function Drawings() {
   return (
     <ReferenceHook>
-      <Navigation /> <Toasts />
+      <Navigation />
+      <Toasts />
       <StatusBar style="auto" />
     </ReferenceHook>
   );
