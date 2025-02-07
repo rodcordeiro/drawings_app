@@ -2,7 +2,7 @@
   "expo": {
     "name": "drawings",
     "slug": "drawings",
-    "description": "A financial assistant app",
+    "description": "A drawing theme suggestions app",
     "owner": "rodcordeiro",
     "privacy": "public",
     "githubUrl": "https://github.com/rodcordeiro/drawings_app",
@@ -16,7 +16,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
