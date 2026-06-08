@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 20.x
           cache: pnpm
-      - uses: expo/expo-github-action@v8
+      - uses: expo/expo-github-action@v9
         with:
           eas-version: latest
           eas-cache: true
