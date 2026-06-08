@@ -22,7 +22,7 @@ jobs:
           cache: pnpm
 
       - name: 🏗 Setup Expo
-        uses: expo/expo-github-action@v8
+        uses: expo/expo-github-action@v9
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
@@ -31,6 +31,6 @@ jobs:
         run: pnpm install
 
       - name: Create preview
-        uses: expo/expo-github-action/preview@v8
+        uses: expo/expo-github-action/preview@v9
         with:
           command: eas update --auto
