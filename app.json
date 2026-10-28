@@ -4,18 +4,12 @@
     "slug": "drawings",
     "description": "A drawing theme suggestions app",
     "owner": "rodcordeiro",
-    "privacy": "public",
     "githubUrl": "https://github.com/rodcordeiro/drawings_app",
     "backgroundColor": "#8A2BE2",
     "primaryColor": "#8A2BE2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -39,6 +33,17 @@
       "eas": {
         "projectId": "7c0b0344-bd2e-4026-a974-c6109043155c"
       }
-    }
+    },
+    "plugins": [
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ]
+    ]
   }
 }
