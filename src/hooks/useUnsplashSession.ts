@@ -28,8 +28,8 @@ export function useUnsplashSession(settings?: UnsplashSettings) {
   const [generation, setGeneration] = useState(0);
   const seenPhotoIds = useRef(new Set<string>());
   const termBag = useRef<string[]>([]);
-  const current = useRef<UnsplashPhoto>();
-  const nextRef = useRef<UnsplashPhoto>();
+  const current = useRef<UnsplashPhoto | undefined>(undefined);
+  const nextRef = useRef<UnsplashPhoto | undefined>(undefined);
   const currentLoaded = useRef(false);
   const nextLoaded = useRef(false);
   const busy = useRef(false);
@@ -98,11 +98,12 @@ export function useUnsplashSession(settings?: UnsplashSettings) {
   }, []);
   const prefetchNext = useCallback(async (config: UnsplashSettings) => {
     if (disposed.current || nextRef.current || !current.current) return;
+    const originId = current.current.id;
     const request = newRequest();
     try {
       const {photo} = await obtainUnique(config, request.controller.signal);
       await loadPhoto(photo, request.controller.signal);
-      if (disposed.current || request.controller.signal.aborted || nextRef.current || photo.id === current.current?.id) return;
+      if (disposed.current || request.controller.signal.aborted || nextRef.current || current.current?.id !== originId || photo.id === current.current?.id) return;
       nextLoaded.current = true;
       nextRef.current = photo;
       setNextPhoto(photo);
