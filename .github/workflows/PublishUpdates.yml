@@ -20,15 +20,22 @@ jobs:
     name: Build new artifact
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        name: Install pnpm
         with:
-          node-version: 18.x
-      - uses: expo/expo-github-action@v8
+          version: 10
+          run_install: false
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+          cache: pnpm
+      - uses: expo/expo-github-action@v9
         with:
           eas-version: latest
           eas-cache: true
           token: ${{ secrets.EXPO_TOKEN }}
-      - run: npm install
-      - run: npm run format
+      - run: pnpm install
+      - run: pnpm format
       - run: eas build -p android --profile production --non-interactive
