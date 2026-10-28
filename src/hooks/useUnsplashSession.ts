@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Image } from 'react-native';
 import { getRandomPhoto, UnsplashError, type UnsplashPhoto } from '@/services/unsplash';
 import type { UnsplashSettings } from '@/stores/unsplashSettings';
+import { shuffleTerms } from '@/utils/unsplash.util';
 
 export type SessionStatus = 'loading_initial' | 'ready' | 'transitioning' | 'waiting_next' | 'recoverable_error';
 type Request = { controller: AbortController; id: number };
@@ -11,14 +12,6 @@ const sleep = (ms: number, signal: AbortSignal) => new Promise<void>((resolve, r
   const abort = () => { clearTimeout(timer); reject(new Error('Cancelled')); };
   signal.addEventListener('abort', abort, { once: true });
 });
-export function shuffleTerms(terms: string[]): string[] {
-  const shuffled = [...terms];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
 export function useUnsplashSession(settings?: UnsplashSettings) {
   const [currentPhoto, setCurrentPhoto] = useState<UnsplashPhoto>();
   const [nextPhoto, setNextPhoto] = useState<UnsplashPhoto>();
