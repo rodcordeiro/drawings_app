@@ -1,0 +1,21 @@
+export function normalizeTerms(values: string[]): string[] {
+  const seen = new Set<string>();
+  return values.map(value => value.trim()).filter(value => {
+    const key = value.toLowerCase();
+    if (!value || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+export function validDuration(value: number): boolean {
+  return Number.isInteger(value) && value >= 10 && value <= 7200;
+}
+
+export function shuffleTerms(terms: string[], random: () => number = Math.random): string[] {
+  const result = [...terms];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}

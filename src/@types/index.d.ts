@@ -8,6 +8,8 @@ declare global {
       disableClock?: boolean;
     };
     References: undefined;
+    Unsplash: undefined;
+    UnsplashSettings: undefined;
     RandomScreen: undefined;
   };
 
