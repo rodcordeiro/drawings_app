@@ -11,9 +11,12 @@ export const GetDrawingReferences = async () =>
     }>('/docs/drawing.json')
     .then((response) => {
       toast.dismiss(id);
-      if(!response.data.references) toast.error(response.status);
+      if (!response.data.references) {
+        toast.error("Nenhuma referência encontrada. Carregando referências padrão");
+        return REFERENCES;
+      }
       toast.success("Referências carregadas!")
-      return response.data.references || REFERENCES;
+      return response.data.references;
     })
     .catch(() => {
       toast.dismiss(id);
