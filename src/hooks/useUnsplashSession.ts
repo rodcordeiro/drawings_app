@@ -169,15 +169,19 @@ export function useUnsplashSession(settings?: UnsplashSettings) {
     setStatus('recoverable_error');
   }, []);
   useEffect(() => {
-    if (settings) void begin(settings);
     return () => {
       disposed.current = true;
       requests.current.forEach(controller => controller.abort());
       requests.current.clear();
     };
-  // A session is intentionally created only once; changes during a session are handled by screen controls.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!!settings]);
+  }, []);
+  const initialized = useRef(false);
+  useEffect(() => {
+    if (settings && !initialized.current) {
+      initialized.current = true;
+      void begin(settings);
+    }
+  }, [settings, begin]);
   const retry = useCallback((config: UnsplashSettings) => current.current ? next(config) : begin(config), [begin, next]);
   return {currentPhoto, nextPhoto, status, error, notice, generation, readyGeneration, seenPhotoIds: seenPhotoIds.current, next, retry, markLoaded, markFailed};
 }
