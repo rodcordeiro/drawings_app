@@ -10,3 +10,12 @@ export function normalizeTerms(values: string[]): string[] {
 export function validDuration(value: number): boolean {
   return Number.isInteger(value) && value >= 10 && value <= 7200;
 }
+
+export function shuffleTerms(terms: string[], random: () => number = Math.random): string[] {
+  const result = [...terms];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
