@@ -21,7 +21,12 @@ export async function getRandomPhoto({query, contentFilter = 'high', signal}: {q
     if (response.status === 404) throw new UnsplashError('no_result', 'Nenhuma foto encontrada.');
     throw new UnsplashError(response.status >= 500 ? 'server' : 'invalid_payload', 'Falha na busca.');
   }
-  const p = await response.json();
+  let p: any;
+  try { p = await response.json(); } catch { throw new UnsplashError('invalid_payload', 'Resposta inválida.'); }
   if (!p?.id || !p?.urls?.regular || !p?.user?.name || !p?.user?.links?.html || !p?.links?.html) throw new UnsplashError('invalid_payload', 'Resposta inválida.');
-  return {id: p.id, imageUrl: p.urls.regular, width: p.width, height: p.height, photographerName: p.user.name, photographerUrl: p.user.links.html, photoUrl: p.links.html};
+  const withAttribution = (url: string) => {
+    const separator = url.includes('?') ? '&' : '?';
+    return url + separator + 'utm_source=drawings_app&utm_medium=referral';
+  };
+  return {id: p.id, imageUrl: p.urls.regular, width: p.width, height: p.height, photographerName: p.user.name, photographerUrl: withAttribution(p.user.links.html), photoUrl: withAttribution(p.links.html)};
 }
