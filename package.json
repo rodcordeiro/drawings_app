@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "format": "npm run lint && npm run pretty",
     "lint": "eslint --fix --ignore-path .eslintignore --fix --ext .ts,.tsx,.js,.jsx .",
-    "pretty": "prettier --ignore-path .eslintignore --write ."
+    "pretty": "prettier --ignore-path .eslintignore --write .",
+    "test:unit": "node --experimental-strip-types --test tests/*.test.mjs"
   },
   "dependencies": {
     "@backpackapp-io/react-native-toast": "^0.15.1",
