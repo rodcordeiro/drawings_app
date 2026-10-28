@@ -32,9 +32,8 @@ const Home: React.FC<ScreenProps<'Home'>> = ({ navigation }) => {
         <Text style={styles.buttonText}>Contagem regressiva</Text>
         <Clock style={[styles.image, { right: -15, top: -10 }]} />
       </Pressable>
-      {/* <Pressable style={[styles.button, { backgroundColor: '#8A2BE2' }]}>
-        <Text style={styles.buttonText}>Configurações</Text>
-      </Pressable> */}
+      <Pressable style={[styles.button, {backgroundColor: '#287d70'}]} onPress={() => navigation.push('Unsplash')}><Text style={styles.buttonText}>Unsplash</Text></Pressable>
+      <Pressable style={[styles.button, {backgroundColor: '#555'}]} onPress={() => navigation.push('UnsplashSettings')}><Text style={styles.buttonText}>Configurações Unsplash</Text></Pressable>
       <Text style={styles.version}>v{version}</Text>
     </View>
   );
